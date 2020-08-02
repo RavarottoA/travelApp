@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="../styles/style.scss">
   </head>
   <body>
+    <main id="mainS">
+      <section>
+          <form class="" onsubmit="return Client.handleSubmit(event)">
+              <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
+              <input id="submitBtn" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
+          </form>
+      <section>
+      <section>
+          <strong>Form Results:</strong>
+          <div id="results"></div>
+      </section>
+    </main>
     <div id = "app">
       <div class ="holder headline">
         Weather Journal App
