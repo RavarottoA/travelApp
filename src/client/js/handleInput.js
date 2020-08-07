@@ -1,7 +1,6 @@
 const baseURL = "http://localhost:8081/traerDatos";
 
-
-//------------------------------------------------------------------------------------------
+let intervalCountdown; 
 
 function handleInput(event) {
     event.preventDefault()
@@ -17,16 +16,20 @@ function handleInput(event) {
         fetch(query)
         .then(res => res.json())
         .then(function(res) {
-            console.log(res);
             document.getElementById('results').innerHTML = "Place: " + formText;
             if (res.APIPic) {
                 const picDiv = document.getElementById("toShowPic");
                 picDiv.innerHTML = `<img id="pictures" src="${res.APIPic}" alt="Image of your destination"></img>`
             } 
-            document.getElementById("forecast").innerHTML = "Forecast: <br/>High Temp: " + res.highTemp + "<br/>"
+            if (res.highTemp && res.lowTemp && res.precip) {
+                console.log(res.highTemp, res.lowTemp, res.precip);
+                document.getElementById("forecast").innerHTML = "Forecast: <br/>High Temp: " + res.highTemp + "<br/>"
                                                                         + "Low Temp: " + res.lowTemp + "<br/>"
                                                                         + "Precipitation: " + res.precip;
-            //document.getElementById('pictures').innerHTML = <img></img>;
+            } else {
+                document.getElementById("forecast").innerHTML = "<p>Forecast available if departure day is within the next 16 days from today</p>";
+            }
+            
         })
 
     } else {
@@ -35,32 +38,35 @@ function handleInput(event) {
     
     if (whenText) {
         // Set the date we're counting down to
-        var countDownDate = new Date(whenText).getTime();
+        let countDownDate = new Date(whenText).getTime();
+
+        if (intervalCountdown) {
+            clearInterval(intervalCountdown);
+        }
 
         // Update the count down every 1 second
-        var x = setInterval(function() {
+        intervalCountdown = setInterval(function() {
 
-        // Get today's date and time
-        var now = new Date().getTime();
+            // Get today's date and time
+            let now = new Date().getTime();
 
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+            // Find the distance between now and the count down date
+            let distance = countDownDate - now;
 
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Time calculations for days, hours, minutes and seconds
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the element with id="demo"
-        document.getElementById("departure").innerHTML = "Time left to departure: " + days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
-
-        // If the count down is finished, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
-        }
+            // Display the result in the element with id="departure"
+            document.getElementById("departure").innerHTML = "Time left to departure: " + days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(intervalCountdown);
+                document.getElementById("departure").innerHTML = "EXPIRED";
+            }
         }, 1000);
     } else {
         alert('The input "When?" is not valid');

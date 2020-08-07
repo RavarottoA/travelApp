@@ -1,56 +1,52 @@
 <!DOCTYPE html>
   <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Weather Journal</title>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/style.scss">
-  </head>
-  <body>
-    <main>
-      <section id="title">
-        <h1 class="appTitle">Travel App</h1>
-      </section>
-      <section>
-          <form id="searchForm" class="mainForm" onsubmit="return Client.handleSubmit(event)">
-            <div>
-              <h2 id="">Let's go on holiday!!!</h2>
-            </div> 
-            <input id="when" type="text" name="input" value="" onblur="onBlur()" placeholder="When? YYYY-MM-DD (2020-08-23)">
-            <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Place">
-            <input id="submitBtn" type="submit" name="" value="submit" onclick="return Client.handleInput(event)" onsubmit="return handleInput(event)">
-          </form>
-      <section>
-      <section id="searchResults">
-          <strong>Form Results:</strong>
-          <div id="results"></div>
-          <div id="departure"></div>
-          <div id="forecast"></div>
-          <div id="toShowPic"></div>
-      </section>
-      <section id="todoList">
-        <div>
-          <h1 class="todoTitle">Write what you are going to do there!</h1>
-        </div>
-        <div id="myDIV" class="header">
-          <h2>To Do List</h2>
-          <input type="text" id="myInput" placeholder="Title...">
-          <input type="submit" name="" value="submit" onclick="return Client.newElement()" class="addBtn"></input>
-        </div>
-        <ul id="myUL">
-          <li>Let's have fun!</li>
-        </ul>
-      </section>
-    </main>
-    <script type="text/javascript" src="../index.js" ></script>
-    <script>
-      // Check that service workers are supported
-      if ('serviceWorker' in navigator) {
-          // Use the window load event to keep the page load performant
-          window.addEventListener('load', () => {
-              navigator.serviceWorker.register('/service-worker.js');
-          });
-      }
-     </script>
-  </body>
+    <head>
+      <meta charset="UTF-8">
+      <title>Travel App</title>
+    </head>
+    <body>
+      <main>
+        <section id="title">
+          <h1 class="appTitle">Travel App</h1>
+        </section>
+        <section>
+            <form id="searchForm" class="mainForm" onsubmit="return Client.handleSubmit(event)">
+              <div>
+                <h2 id="">Let's go on holiday!!!</h2>
+              </div> 
+              <input id="when" type="text" name="input" value="" placeholder="When? YYYY-MM-DD (2020-08-23)">
+              <input id="name" type="text" name="input" value="" placeholder="Place">
+              <input id="submitBtn" type="submit" name="" value="submit" onclick="return Client.handleInput(event)" onsubmit="return handleInput(event)">
+            </form>
+        <section>
+        <section id="searchResults">
+            <strong>Form Results:</strong>
+            <div id="results"></div>
+            <div id="departure"></div>
+            <div id="forecast"></div>
+            <div id="toShowPic"></div>
+        </section>
+        <section id="todoList">
+          <div>
+            <h1 class="todoTitle">Write what you are going to do there!</h1>
+          </div>
+          <div id="myDIV" class="header">
+            <h2>To Do List</h2>
+            <input type="text" id="myInput" placeholder="Title...">
+            <input type="submit" name="" value="submit" onclick="return Client.newElement()" class="addBtn"></input>
+          </div>
+          <ul id="myUL">
+            <li>Let's have fun!</li>
+          </ul>
+        </section>
+      </main>
+      <script type="text/javascript" src="/main.js" ></script>
+      <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+      </script>
+    </body>
 </html>

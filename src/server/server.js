@@ -67,11 +67,10 @@ const pixKey = "17800755-dc3c4db21742e0896a432380f";
 const cityNamePrefix = "&q=";
 const pixURLEnd = "&image_type=photo";
 
-
-
 let datos = {};
 
  app.get("/traerDatos", function (req, res){
+    datos = {};
     const name = req.query.name;
     const geoURL = apiURL + name + urlRest + userName;
     axios.post(geoURL, {})
@@ -99,7 +98,7 @@ let datos = {};
             const resultado = axiosRes.data.data; 
             for (let i = 0; i < resultado.length ; i++) {
                 if (resultado[i].datetime === when) {
-                    console.log(resultado[i]);
+                    console.log("Resultado del forecast: ", resultado[i]);
                     datos["highTemp"] = resultado[i].high_temp;
                     datos["lowTemp"] = resultado[i].low_temp;
                     datos["precip"] = resultado[i].precip;

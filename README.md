@@ -1,10 +1,12 @@
-# Weather-Journal App Project
+# Travel App
 
 ## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+This app allows you to choose your next holiday destination, giving you a picture of the desired place, plus information about the weather. Furthermore, you can create a **Todo List** in order to be trully prepared for your trip.
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
-
-## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+## Dependencies
+"axios": "^0.19.2",
+"body-parser": "^1.19.0",
+"cors": "^2.8.5",
+"express": "^4.17.1",
+"webpack": "^4.44.1",
+"webpack-cli": "^3.3.12"
