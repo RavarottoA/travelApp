@@ -37,20 +37,12 @@ function handleInput(event) {
     }
     
     if (whenText) {
-        // Set the date we're counting down to
         let countDownDate = new Date(whenText).getTime();
-
         if (intervalCountdown) {
             clearInterval(intervalCountdown);
         }
-
-        // Update the count down every 1 second
         intervalCountdown = setInterval(function() {
-
-            // Get today's date and time
             let now = new Date().getTime();
-
-            // Find the distance between now and the count down date
             let distance = countDownDate - now;
 
             // Time calculations for days, hours, minutes and seconds
@@ -62,7 +54,6 @@ function handleInput(event) {
             // Display the result in the element with id="departure"
             document.getElementById("departure").innerHTML = "Time left to departure: " + days + "d " + hours + "h "
             + minutes + "m " + seconds + "s ";
-            // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(intervalCountdown);
                 document.getElementById("departure").innerHTML = "Time left to departure: No time left";

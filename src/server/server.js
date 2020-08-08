@@ -18,9 +18,6 @@ app.use(cors());
 app.use(express.static("dist"));
 
 // Geonames
-//http://api.geonames.org/searchJSON?q=london&maxRows=10&username=demo
-//http://api.geonames.org/searchJSON?name=${destination}&maxRows=1&username=${geonamesUsername}
-
 const apiURL = "http://api.geonames.org/searchJSON?name=";   
 const urlRest = "&maxRows=1&username=";
 const userName = "alejandror";
@@ -33,7 +30,6 @@ const APIKey = "&key=";
 const foreKey = "886fd37c4c9347bdb66e82b67d105eff";
 
 // Pixabay API
-//https://pixabay.com/api/?key=17800755-dc3c4db21742e0896a432380f&q=yellow+flowers&image_type=photo
 const pixURL = "https://pixabay.com/api/?key=";
 const pixKey = "17800755-dc3c4db21742e0896a432380f";
 const cityNamePrefix = "&q=";
@@ -78,8 +74,6 @@ let datos = {};
             datos["APIPic"] = imgURL;
             res.json(datos);
             res.end();
-            //let imgMaker = document.getElementById("pictures");
-            //imgMaker.src = imgURL;
         })
 
         
