@@ -1,7 +1,3 @@
-// Setup empty JS object to act as endpoint for all routes
-const projectData = {
-    entries: []
-};
 
 // Require Express to run server and routes
 const express = require("express");
@@ -20,30 +16,6 @@ app.use(cors());
 
 // Initialize the main project folder
 app.use(express.static("dist"));
-
-
-// Setup Server
-const port = 8081;
-const server = app.listen(port, listening);
-
-function listening() {
-    console.log("Server Running!")
-    console.log(`Running on localHost: ${port}`);
-}
-
-app.get("/info", function (req, res) {
-    res.send(projectData.entries[projectData.entries.length-1]);
-})
-
-app.post("/info", storeData);
-
-function storeData (req, res) {
-    const entry = {}; 
-    entry.latitude = req.body.lat;
-    entry.longitude = req.body.lng;
-    entry.country = req.body.countryName;
-    projectData.entries.push(entry);
-}
 
 // Geonames
 //http://api.geonames.org/searchJSON?q=london&maxRows=10&username=demo
@@ -96,7 +68,11 @@ let datos = {};
         axios.get(forecastCallURL, {})
         .then(function (axiosRes){
             const resultado = axiosRes.data.data; 
-            for (let i = 0; i < resultado.length ; i++) {
+            let forecast = dateCheck (resultado, when);
+            datos["highTemp"] = forecast.highTemp;
+            datos["lowTemp"] = forecast.lowTemp;
+            datos["precip"] = forecast.precip;
+            /*for (let i = 0; i < resultado.length ; i++) {
                 if (resultado[i].datetime === when) {
                     console.log("Resultado del forecast: ", resultado[i]);
                     datos["highTemp"] = resultado[i].high_temp;
@@ -104,7 +80,7 @@ let datos = {};
                     datos["precip"] = resultado[i].precip;
                     break;
                 }
-            }
+            }*/
 
 
         const pixabayCall = pixURL + pixKey + cityNamePrefix + name + pixURLEnd;
@@ -131,10 +107,26 @@ let datos = {};
     });
 })
 
-// -------------Forecast ------------
+function dateCheck (apiRes, userDate) {
+    for (let i = 0; i < apiRes.length ; i++) {
+        if (apiRes[i].datetime === userDate) {
+            return {
+                highTemp: apiRes[i].high_temp, 
+                lowTemp: apiRes[i].low_temp, 
+                precip: apiRes[i].precip 
+            }
+        }
+    }
+}
+
+// Setup Server
+const port = 8081;
+const server = app.listen(port, function () {
+    console.log("Server Running!")
+    console.log(`Running on localHost: ${port}`);
+ });
 
 
- // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
+module.exports = { app, server }
 

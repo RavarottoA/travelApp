@@ -1,21 +1,19 @@
-const baseURL = "http://localhost:8081/traerDatos";
-
 let intervalCountdown; 
 
 function handleInput(event) {
-    event.preventDefault()
-
+    event.preventDefault();
+    const baseURL = "http://localhost:8081/traerDatos";
     // check what text was put into the form field
     let formText = document.getElementById('name').value;
     const whenText = document.getElementById('when').value;
     
     if (formText && whenText) {
         const query = baseURL + "?name=" + formText + "&when=" + whenText;
-        console.log("::: Form Submitted :::")
         console.log(query);
         fetch(query)
         .then(res => res.json())
         .then(function(res) {
+            console.log(res);
             document.getElementById('results').innerHTML = "Place: " + formText;
             if (res.APIPic) {
                 const picDiv = document.getElementById("toShowPic");
@@ -30,6 +28,9 @@ function handleInput(event) {
                 document.getElementById("forecast").innerHTML = "<p>Forecast available if departure day is within the next 16 days from today</p>";
             }
             
+        })
+        .catch (function (error){
+            console.log(error);
         })
 
     } else {
@@ -65,7 +66,7 @@ function handleInput(event) {
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(intervalCountdown);
-                document.getElementById("departure").innerHTML = "EXPIRED";
+                document.getElementById("departure").innerHTML = "Time left to departure: No time left";
             }
         }, 1000);
     } else {
@@ -73,4 +74,4 @@ function handleInput(event) {
     }
 }
 
-export { handleInput }
+export {handleInput}

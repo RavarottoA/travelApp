@@ -10,13 +10,13 @@
           <h1 class="appTitle">Travel App</h1>
         </section>
         <section>
-            <form id="searchForm" class="mainForm" onsubmit="return Client.handleSubmit(event)">
+            <form id="searchForm" class="mainForm">
               <div>
                 <h2 id="">Let's go on holiday!!!</h2>
               </div> 
               <input id="when" type="text" name="input" value="" placeholder="When? YYYY-MM-DD (2020-08-23)">
               <input id="name" type="text" name="input" value="" placeholder="Place">
-              <input id="submitBtn" type="submit" name="" value="submit" onclick="return Client.handleInput(event)" onsubmit="return handleInput(event)">
+              <input id="submitBtn" type="submit" name="" value="submit">
             </form>
         <section>
         <section id="searchResults">
@@ -33,7 +33,7 @@
           <div id="myDIV" class="header">
             <h2>To Do List</h2>
             <input type="text" id="myInput" placeholder="Title...">
-            <input type="submit" name="" value="submit" onclick="return Client.newElement()" class="addBtn"></input>
+            <input type="submit" name="" value="submit" class="addBtn"></input>
           </div>
           <ul id="myUL">
             <li>Let's have fun!</li>
