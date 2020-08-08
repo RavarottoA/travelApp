@@ -7,7 +7,6 @@ body{
 #app{
     display: grid;
     grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
     height:100vh;
     background: #169270;
     color: #f0d43a;
@@ -51,8 +50,6 @@ body{
     background: rgba(59, 74, 107, .4);
 }
 
-
-/*  Basic Styling To Override Default For Basic HTML Elements */
 label{
     display:block;
     font-size: 27px;
@@ -88,6 +85,7 @@ textarea{
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
+
 /* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
@@ -95,6 +93,7 @@ textarea:focus,
 button:focus {
     outline: none;
 }
+
 /* Style for Placeholder Text*/
 ::placeholder { /* Firefox, Chrome, Opera */ 
     font-family: 'Oswald', sans-serif;
@@ -115,18 +114,16 @@ button:focus {
 
 // ---------------- to Do list -------------------------------
 
-/* Include the padding and border in an element's total width and height */
+
 * {
     box-sizing: border-box;
   }
   
-  /* Remove margins and padding from the list */
   ul {
     margin: 0;
     padding: 0;
   }
   
-  /* Style the list items */
   ul li {
     cursor: pointer;
     position: relative;
@@ -134,46 +131,21 @@ button:focus {
     background: #eee;
     font-size: 18px;
     transition: 0.2s;
-  
-    /* make the list items unselectable */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
   }
   
-  /* Set all odd list items to a different color (zebra-stripes) */
   ul li:nth-child(odd) {
     background: #f9f9f9;
   }
   
-  /* Darker background-color on hover */
   ul li:hover {
     background: #ddd;
   }
   
-  /* When clicked on, add a background color and strike out text */
-  ul li.checked {
-    background: #888;
-    color: #fff;
-    text-decoration: line-through;
-  }
-  
-  /* Add a "checked" mark when clicked on */
-  ul li.checked::before {
-    content: '';
-    position: absolute;
-    border-color: #fff;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
-  }
-  
-  /* Style the close button */
+  /* close button */
   .close {
     position: absolute;
     right: 0;
@@ -182,16 +154,23 @@ button:focus {
   }
   
   .close:hover {
-    background-color: #f44336;
+    background-color: #26B0AD;
     color: white;
   }
   
-  /* Style the header */
+  /* header */
   .header {
-    background-color: #f44336;
+    background-color: #26B0AD;
     padding: 30px 40px;
     color: white;
     text-align: center;
+  }
+
+  #todoListHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   /* Clear floats after the header */
@@ -212,22 +191,27 @@ button:focus {
     font-size: 16px;
   }
   
-  /* Style the "Add" button */
+  /*  Btn */
   .addBtn {
     padding: 10px;
     width: 25%;
-    background: #d9d9d9;
-    color: #555;
+    background: #BAFFFE;
     float: left;
+    color: black;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 0;
+    border: 1px solid black;
+    border-radius: 5% 15%;
+    margin-top: 5px;
+    width: 25%;
+    height: 60px;
   }
   
   .addBtn:hover {
-    background-color: #bbb;
+    background-color: #26B0AD;
+    border: 1px solid black;
   }
 
   .todoTitle {
@@ -256,4 +240,6 @@ button:focus {
     margin-left: 10%;
     margin-right: 10%;
     padding-bottom: 2%;
+    margin-top: 25px;
+    margin-bottom: 100px;
   }

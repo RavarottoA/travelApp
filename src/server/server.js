@@ -48,19 +48,13 @@ let datos = {};
     axios.post(geoURL, {})
     .then(function (axiosRes){
         const result = axiosRes.data; 
-        //console.log(result);
         const latitude = result.geonames[0].lat; 
         const longitude = result.geonames[0].lng; 
         const country = result.geonames[0].countryName; 
-        /*console.log(latitude);
-        console.log(longitude);
-        console.log(country);*/
         datos["APILat"] = latitude;
         datos["APILong"] = longitude;
         datos["APICountry"] = country;
-        console.log(datos);
-        //datos["sentence"] = name;
-        //datos["subjectivity"]= r.subjectivity; 
+        
 
         const when = req.query.when;
         const forecastCallURL = foreCastURL + lat + latitude + long + longitude + APIKey + foreKey;
@@ -72,15 +66,7 @@ let datos = {};
             datos["highTemp"] = forecast.highTemp;
             datos["lowTemp"] = forecast.lowTemp;
             datos["precip"] = forecast.precip;
-            /*for (let i = 0; i < resultado.length ; i++) {
-                if (resultado[i].datetime === when) {
-                    console.log("Resultado del forecast: ", resultado[i]);
-                    datos["highTemp"] = resultado[i].high_temp;
-                    datos["lowTemp"] = resultado[i].low_temp;
-                    datos["precip"] = resultado[i].precip;
-                    break;
-                }
-            }*/
+            
 
 
         const pixabayCall = pixURL + pixKey + cityNamePrefix + name + pixURLEnd;
@@ -88,10 +74,8 @@ let datos = {};
         axios.get(pixabayCall, {})
         .then(function (axiosRes){
             const pixResult = axiosRes.data;
-            const imgURL = pixResult.hits[0].webformatURL; 
-            console.log(imgURL);
+            const imgURL = pixResult.hits[0].webformatURL;
             datos["APIPic"] = imgURL;
-            console.log(datos);
             res.json(datos);
             res.end();
             //let imgMaker = document.getElementById("pictures");
@@ -121,12 +105,14 @@ function dateCheck (apiRes, userDate) {
 
 // Setup Server
 const port = 8081;
-const server = app.listen(port, function () {
-    console.log("Server Running!")
-    console.log(`Running on localHost: ${port}`);
- });
+if (process.env.NODE_ENV !== 'test') {
+    const server = app.listen(port, function () {
+        console.log("Server Running!")
+        console.log(`Running on localHost: ${port}`);
+    });
+}
 
 
 
-module.exports = { app, server }
+module.exports = { app }
 

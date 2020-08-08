@@ -13,7 +13,6 @@ function handleInput(event) {
         fetch(query)
         .then(res => res.json())
         .then(function(res) {
-            console.log(res);
             document.getElementById('results').innerHTML = "Place: " + formText;
             if (res.APIPic) {
                 const picDiv = document.getElementById("toShowPic");
